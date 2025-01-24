@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vote for Images</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      background-color: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #ff6347;
+    }
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+    }
+    .image-container img {
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+    .vote-button {
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .vote-button:hover {
+      background-color: #ff4500;
+    }
+    .top-images {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vote for Images</h1>
+  <div id="images"></div>
+  <div class="top-images">
+    <h2>Top 10 Images of the Day</h2>
+    <ul id="top-images-list"></ul>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script>
+    import firebase from 'firebase/app';
+    import { getFirestore } from 'firebase/firestore';
+    document.addEventListener("DOMContentLoaded", function() {
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "${process.env.FIREBASE_API_KEY}",
+        authDomain: "${process.env.FIREBASE_AUTH_DOMAIN}",
+        projectId: "${process.env.FIREBASE_PROJECT_ID}",
+        storageBucket: "${process.env.FIREBASE_STORAGE_BUCKET}",
+        messagingSenderId: "${process.env.FIREBASE_MESSAGING_SENDER_ID}",
+        appId: "${process.env.FIREBASE_APP_ID}"
+      };
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Fetch and display images
+      fetch('/view-photos')
+        .then(response => response.json())
+        .then(images => {
+          const imagesContainer = document.getElementById('images');
+          images.forEach(image => {
+            const imageContainer = document.createElement('div');
+            imageContainer.classList.add('image-container');
+            imageContainer.innerHTML = `
+              <img src="https://res.cloudinary.com/${cloudinaryConfig.cloud_name}/image/upload/w_300,h_200,c_fill,q_100/${image}.jpg" alt="Image">
+              <button class="vote-button" data-id="${image}">Vote</button>
+            `;
+            imagesContainer.appendChild(imageContainer);
+          });
+
+          // Add event listeners to vote buttons
+          document.querySelectorAll('.vote-button').forEach(button => {
+            button.addEventListener('click', function() {
+              const imageId = this.getAttribute('data-id');
+              fetch('/vote', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ imageId })
+              }).then(() => {
+                alert('Vote recorded!');
+              }).catch(error => {
+                console.error('Error voting:', error);
+              });
+            });
+          });
+        });
+
+      // Fetch and display top 10 images of the day
+      fetch('/top-images')
+        .then(response => response.json())
+        .then(topImages => {
+          const topImagesList = document.getElementById('top-images-list');
+          topImages.forEach(image => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `Image ID: ${image.id}, Votes: ${image.votes}`;
+            topImagesList.appendChild(listItem);
+          });
+        });
+    });
+  </script>
+</body>
+</html>
