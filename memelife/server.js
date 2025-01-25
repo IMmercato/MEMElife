@@ -13,7 +13,7 @@ app.use(express.static("templates"));
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
-  secret: "fanculodiocan",
+  secret: "psw",
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }

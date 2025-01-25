@@ -1,5 +1,5 @@
-const api_key = "716527226913465";
-const cloud_name = "dpx78k27a";
+const api_key = "YOUR_API_KEY";
+const cloud_name = "YOUR_CLOUD_NAME";
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
 import { getFirestore, setDoc, deleteDoc, collection, doc, getDocs, query, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
@@ -7,12 +7,12 @@ import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gsta
 
 // Initialize Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBHVk5ijv2KLWuKzBGoRR76qolOhL3qb-k",
-    authDomain: "meme-bb867.firebaseapp.com",
-    projectId: "meme-bb867",
-    storageBucket: "meme-bb867.firebasestorage.app",
-    messagingSenderId: "528411031923",
-    appId: "1:528411031923:web:f7e52f4eaf94a3b2fe2d06",
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
