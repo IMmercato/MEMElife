@@ -1,5 +1,5 @@
-const api_key = "YOUR_API_KEY";
-const cloud_name = "YOUR_CLOUD_NAME";
+const api_key = "716527226913465";
+const cloud_name = "dpx78k27a";
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
 import { getFirestore, setDoc, deleteDoc, collection, doc, getDocs, query, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
