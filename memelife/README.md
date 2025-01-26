@@ -1,2 +1,0 @@
-"# MEMElife" 
-"# MEMElife" 
