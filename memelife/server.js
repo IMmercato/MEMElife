@@ -4,7 +4,6 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const { v2: cloudinary } = require("cloudinary");
 const fse = require("fs-extra");
-const functions = require("firebase-functions");
 dotenv.config();
 const app = express();
 
@@ -245,4 +244,8 @@ app.post("/delete-photo", async (req, res) => {
   }
 });
 
-exports.app = functions.https.onRequest(app);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
