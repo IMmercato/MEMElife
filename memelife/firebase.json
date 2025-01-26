@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "memelife",
+    "public": "templates",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

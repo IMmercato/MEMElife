@@ -7,12 +7,12 @@ import { getAuth, signInAnonymously, onAuthStateChanged } from 'https://www.gsta
 
 // Initialize Firebase
 const firebaseConfig = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
+    apiKey: "AIzaSyBHVk5ijv2KLWuKzBGoRR76qolOhL3qb-k",
+    authDomain: "meme-bb867.firebaseapp.com",
+    projectId: "meme-bb867",
+    storageBucket: "meme-bb867.firebasestorage.app",
+    messagingSenderId: "528411031923",
+    appId: "1:528411031923:web:f7e52f4eaf94a3b2fe2d06",
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
